@@ -1,18 +1,17 @@
 import _ from 'lodash';
+import axios from 'axios';
 import * as types from './actionTypes';
 
-export const fetchSections = () => ({
-    type: SECTIONS_FETCHED,
-    sections: [
-        {id: 'GH', img: 1, URL: ''},
-        {id: 'SOF', img: 2, URL: ''}
-    ]
-});
-// export function fetchSections() {
-//     return (
-//         const sections = ;
-//         dispatch({type: types.SECTIONS_FETCHED, sections })
-//     );
-// }
-
-// export function select
+export function fetchSections() {
+    return function(dispatch){
+        axios.get('sections.json')
+            .then((response) => {
+                const sections = response.data;
+                const sectionsByName = _.keyBy(sections, (sections) => sections.name);
+                dispatch({type: types.SECTIONS_FETCHED, sectionsByName});
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}

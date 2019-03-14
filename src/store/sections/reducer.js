@@ -1,45 +1,45 @@
 
 import _ from 'lodash';
 import Immutable from 'seamless-immutable';
-import { types } from 'util';
-import {} from './actionTypes';
-
+import * as types from './actionTypes';
 
 const initialState = Immutable({
-    sections: undefined,
+    sectionsByName: undefined,
     selectedSection: undefined,
     selectionFinalized: false
 });
 
 export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
-        case types.SELECTIONS_FETCHED:
+        case types.SECTIONS_FETCHED:
             return state.merge({
-                sections: action.sections,
-                selectionFinalized: false
+                sectionsByName: action.sectionsByName,
             });
-        case types.OPEN_GH:
-            return state.merge({
-                selectedSection: 'GH',
-                selectionFinalized: true
-            })
-        case types.OPEN_SOF:
-            return state.merge({
-                selectedSection: 'SOF',
-                selectionFinalized: true
-            })
+        default:
+            return state;
+        // case types.OPEN_GH:
+        //     return state.merge({
+        //         selectedSection: 'GH',
+        //         selectionFinalized: true
+        //     })
+        // case types.OPEN_SOF:
+        //     return state.merge({
+        //         selectedSection: 'SOF',
+        //         selectionFinalized: true
+        //     })
     }
 }
 
 export function getSections(state) {
-    const sections = state.section.secions;
-    return sections;
+    const sectionsByName = state.sections.sectionsByName;
+    const sectionsNameArray = _.keys(sectionsByName)
+    return [sectionsByName, sectionsNameArray];
 }
 
 export function getSelectedSection(state) {
-    return state.section.selectedSection;
+    return false //state.sections.selectedSection;
 }
 
 export function isSectionChoosed(state) {
-    return state.sections.selectionFinalized;
+    return false //state.sections.selectionFinalized;
 }
