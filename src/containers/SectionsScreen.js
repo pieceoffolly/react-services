@@ -19,29 +19,18 @@ class SectionsScreen extends Component {
   }
 
   render() {
-    // if (!this.props.topicsByUrl) return this.renderLoading();
     return (
-      <div className="SectionsScreen">
-        <h3>Choose 3 topics of interest</h3>
+      <div>
+        <h3>Choose sections</h3>
         <SectionsView
             sectionsIDArray={this.props.sectionsNameArray}
             sectionsByID={this.props.sectionsByName}
             renderSection={this.renderSection} />
-        {/* {!this.props.canFinalizeSelection ? false :
-          <button className="NextScreen" onClick={this.onNextScreenClick} />
-        } */}
       </div>
     );
   }
 
-  renderLoading() {
-    return (
-      <p>Loading...</p>
-    );
-  }
-
   renderSection(sectionID, section) {
-    // const selected = this.props.selectedTopicsByUrl[topicUrl];
     return (
       <SectionsList
         sectionID={sectionID}>
@@ -55,18 +44,11 @@ class SectionsScreen extends Component {
     )
   }
 
-//   onSectionClick(sectionID) {
-//     this.props.dispatch(sectionsActions.selectSection(sectionID));
-//   }
-
-//   onNextScreenClick() {
-//     this.props.dispatch(topicsActions.finalizeTopicSelection());
-//   }
-
+  // onSectionClick(sectionID) {
+  //   this.props.dispatch(sectionsActions.selectSection(sectionID));
+  // }
 }
 
-// which props do we want to inject, given the global store state?
-// always use selectors here and avoid accessing the state directly
 function mapStateToProps(state) {
   const [sectionsByName, sectionsNameArray] = sectionsSelectors.getSections(state);
   return {

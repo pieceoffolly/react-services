@@ -13,8 +13,12 @@ export default function reduce(state = initialState, action = {}) {
     switch (action.type) {
         case types.SECTIONS_FETCHED:
             return state.merge({
-                sectionsByName: action.sectionsByName,
+                sectionsByName: action.sectionsByName
             });
+        case types.SECTION_SELECTED:
+            return state.merge({
+                selectedSection: action.sectionName
+            })
         default:
             return state;
         // case types.OPEN_GH:
@@ -36,8 +40,13 @@ export function getSections(state) {
     return [sectionsByName, sectionsNameArray];
 }
 
+// export function getSection(state) {
+//     return _.find(state.sections.sectionsByName, {sectionName})
+//     // return state.sections.sectionsByName.name
+// }
+
 export function getSelectedSection(state) {
-    return false //state.sections.selectedSection;
+    return state.sections.selectedSection;
 }
 
 export function isSectionChoosed(state) {
