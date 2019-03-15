@@ -2,10 +2,10 @@ import _ from 'lodash';
 import axios from 'axios';
 import * as types from './actionTypes';
 import * as sectionsSelectors from './reducer';
-import * as postActions from '';
+import * as ghActions from '../gh/action';
 
 export function fetchSections() {
-    return function(dispatch){
+    return (dispatch) => {
         axios.get('sections.json')
             .then((response) => {
                 const sections = response.data;
@@ -19,9 +19,9 @@ export function fetchSections() {
 }
 
 export function selectSection(sectionName) {
-    return function(dispatch) {
-        dispatch({type: types.SECTION_SELECTED, selectedSection: sectionName });
+    return (dispatch) => {
+        dispatch({type: types.SECTION_SELECTED, sectionName });
 
-        dispatch(postActions)
+        // dispatch(postActions)
     }
 }

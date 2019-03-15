@@ -25,7 +25,12 @@ class SectionsScreen extends Component {
         <SectionsView
             sectionsIDArray={this.props.sectionsNameArray}
             sectionsByID={this.props.sectionsByName}
-            renderSection={this.renderSection} />
+            renderSection={this.renderSection} 
+            />
+        
+        {/* {!this.props.selectedSection 
+         ? <h3>false</h3>
+         : <h3>{this.props.selectedSection}</h3>} */}
       </div>
     );
   }
@@ -33,27 +38,25 @@ class SectionsScreen extends Component {
   renderSection(sectionID, section) {
     return (
       <SectionsList
-        sectionID={sectionID}>
-         {/* onClick={this.onRowClick}> */}
-        {/* // selected={selected}> */}
+        sectionID={sectionID}        
+        onClick={this.onSectionClick}>
         <img className="sectionImage" src={section.img} alt={section.URL} />
-        {/* <img src={section.img} alt={section.url} /> */}
-        {/* <h3>{topic.title}</h3>
-        <p>{topic.description}</p> */}
       </SectionsList>
     )
   }
+  //onClick={this.onSectionClick}>
 
-  // onSectionClick(sectionID) {
-  //   this.props.dispatch(sectionsActions.selectSection(sectionID));
-  // }
+  onSectionClick(sectionID) {
+    this.props.dispatch(sectionsActions.selectSection(sectionID));
+  }
 }
 
 function mapStateToProps(state) {
   const [sectionsByName, sectionsNameArray] = sectionsSelectors.getSections(state);
   return {
     sectionsByName,
-    sectionsNameArray,    
+    sectionsNameArray,  
+    selectedSection: sectionsSelectors.getSelectedSection(state)  
     // canFinalizeSelection: sectionsSelectors.isTopicSelectionValid(state)
   };
 }

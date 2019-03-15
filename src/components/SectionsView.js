@@ -11,7 +11,7 @@ export default class SectionsView extends Component {
 
     render() {
         return (
-            <ul class="tileList">
+            <ul className="tileList">
                 {_.map(this.props.sectionsIDArray, this.renderSectionByID)}
             </ul>
         )

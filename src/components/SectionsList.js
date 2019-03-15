@@ -21,8 +21,7 @@ export default class SelectionsList extends Component {
 
   onClick() {
     if (typeof this.props.onClick === 'function') {
-      this.props.onClick(this.props.sectionId);
+      this.props.onClick(this.props.sectionID);
     }
   }
-
 }
