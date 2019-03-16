@@ -22,6 +22,6 @@ export function selectSection(sectionName) {
     return (dispatch) => {
         dispatch({type: types.SECTION_SELECTED, sectionName });
 
-        // dispatch(postActions)
+        dispatch(ghActions.fetchReposes());
     }
 }

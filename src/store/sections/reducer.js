@@ -6,7 +6,7 @@ import * as types from './actionTypes';
 const initialState = Immutable({
     sectionsByName: undefined,
     selectedSection: undefined,
-    selectionFinalized: false
+    sectionChoosed: false
 });
 
 export default function reduce(state = initialState, action = {}) {
@@ -17,7 +17,8 @@ export default function reduce(state = initialState, action = {}) {
             });
         case types.SECTION_SELECTED:
             return state.merge({
-                selectedSection: action.sectionName
+                selectedSection: action.sectionName,
+                sectionChoosed: true
             })
         default:
             return state;

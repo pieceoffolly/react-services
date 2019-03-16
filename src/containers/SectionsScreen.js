@@ -21,7 +21,7 @@ class SectionsScreen extends Component {
   render() {
     return (
       <div>
-        <h3>Choose sections</h3>
+        <h3>Choose section</h3>
         <SectionsView
             sectionsIDArray={this.props.sectionsNameArray}
             sectionsByID={this.props.sectionsByName}
