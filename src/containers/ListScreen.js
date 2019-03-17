@@ -7,25 +7,11 @@ import * as ghSelectors from '../store/gh/reducer';
 import ListView from '../components/ListView';
 import ListRow from '../components/ListRow';
 
-
-// const ListBody = styled.div`
-//     margin: 10px 10px 10px 10px;
-//     background: #f5f5f5;
-// `;
-
-// const ListHeader = styled.div
-
-// ;
-
-const Loading = styled.p`
-
-`;
-
 const Avatar = styled.img`
     max-width:50px;
     max-height:50px;
+    margin-bottom: -10px;
 `;
-
 
 class ListScreen extends Component {
     constructor(props) {
@@ -37,13 +23,14 @@ class ListScreen extends Component {
         if (!this.props.elementsById) return this.renderLoading();
         return (
             <div>
+                <h3>{this.props.header}</h3>
                 <ListView
                     rowsIdArray={this.props.elementsIdArray}
                     rowsById={this.props.elementsById}
                     ulType={this.props.ulType}
                     src={this.props.src}
                     renderRow={this.renderRow} 
-                />
+                />                
             </div>
         )
         
@@ -51,36 +38,37 @@ class ListScreen extends Component {
 
     renderLoading() {
         return (
-            <p>Loading...</p>
+            <h3>Loading...</h3>
         )
     };
 
     renderRow(elementId, element) {
         return (
             <ListRow
-                rowId={elementId}
+                rowId={element.id}
                 onClick={this.onRowClick}>  
-                <Avatar src={element.avatar_url} alt='avatar' />                                 
-                <a>{element.name}</a>
+                <div><Avatar src={element.avatar_url} alt='avatar' /></div>
+                <div> {element.name} (owner: {element.owner})</div>
             </ListRow>
         )
     };
 
-    onRowClick() {
-
+    onRowClick(rowId) {
+        const answer = window.confirm("Подтверждаете переход к просмотру?");
+        if (answer) this.props.dispatch(ghActions.selectElement(rowId));
     }
 }
 
 function mapStateToProps(state) {
-    const [elementsById, elementsIdArray]  = ghSelectors.getReposes(state);
-    const ulType = 'gh';
+    const [elementsById, elementsIdArray, elementType]  = ghSelectors.getElements(state);
+    const ulType = elementType;
+    const header = 'Github repositories';
     return {
       elementsById,
       elementsIdArray,
-      ulType
+      ulType,
+      header
     };
   }
 
 export default connect(mapStateToProps)(ListScreen);
-
-//{/*  */}

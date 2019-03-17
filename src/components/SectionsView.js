@@ -19,7 +19,7 @@ export default class SectionsView extends Component {
 
     renderSectionById(sectionId) {
         return (
-            <li key = {sectionId}>
+            <li key={sectionId}>
                 {this.renderSectionThroughProps(sectionId)}
             </li>
         )

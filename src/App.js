@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sectionSelectors from './store/sections/reducer';
+import * as ghSelectors from './store/gh/reducer';
 import SectionsScreen from './containers/SectionsScreen';
 import ListScreen from './containers/ListScreen';
+import DetailsScreen from './containers/DetailsScreen';
 import './App.css';
 
 
@@ -12,7 +14,9 @@ class App extends Component {
       <div className="App">
         {!this.props.sectionChoosed 
           ? <SectionsScreen /> 
-          : <ListScreen />
+          : !this.props.elementChoosed
+            ? <ListScreen />
+            : <DetailsScreen />
         }
       </div>
     );
@@ -21,7 +25,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    sectionChoosed: sectionSelectors.isSectionChoosed(state)
+    sectionChoosed: sectionSelectors.isSectionChoosed(state),
+    elementChoosed: ghSelectors.isElementChoosed(state)
   }
 }
 

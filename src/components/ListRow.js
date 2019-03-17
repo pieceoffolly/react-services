@@ -1,6 +1,13 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import autoBind from 'react-autobind';
+
+const ParLiDiv = styled.div`
+    width: 100%;
+    height: 100%;
+    margin: 0;
+`;
 
 class ListRow extends Component {
     constructor(props) {
@@ -11,10 +18,10 @@ class ListRow extends Component {
     render() {
         // const backgroundColor = this.props.selected ? '#c0f0ff' : '#fff';
         return (
-          <div
+          <ParLiDiv
             onClick={this.onClick}>
             {this.props.children}
-          </div>
+          </ParLiDiv>
         );
       }
     

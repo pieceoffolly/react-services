@@ -6,32 +6,29 @@ import autoBind from 'react-autobind';
 const ListUl = styled.ul`
     flex-wrap: wrap;
     display: table;
+    margin: 0;
+    list-style-type: none;
 `;
 
 const SectionsUl = styled.ul`
-    
     flex-wrap: wrap;
     justify-content: center;
+
 `;
 
 const GHLi = styled.li`
-    margin: 5px 0px 0px 5px;
+    margin: 0px 0px 10px 0px;
     background-color: #f5f5f5;
     border-radius: 5%;
     min-width: 150px;
-    max-width:400px;
+    max-width:500px;
     height: 50px;
     text-align: left;
-    
-    
-    img a{
-        display: block;
-        position: absolute;
-    }
 
-    a{
+    div {
+        display: inline-block;
+        vertical-align: middle;     
         margin-left: 10px;
-        margin-bottom: 10px;
     }
 
     &:hover {
@@ -43,6 +40,7 @@ const GHLi = styled.li`
 //     display: inline-block;
 //     height: 100%;
 //     vertical-align: middle;
+// border: 2px solid black;  
 // }
 
 class ListView extends Component {

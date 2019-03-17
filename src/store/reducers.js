@@ -1,7 +1,9 @@
 import sections from './sections/reducer';
-import reposes from './gh/reducer';
+import elements from './gh/reducer';
+import details from './details/reducer';
 
 export {
   sections,
-  reposes
+  elements,
+  details
 };

@@ -26,7 +26,7 @@ class SectionsScreen extends Component {
             sectionsIdArray={this.props.sectionsNameArray}
             sectionsById={this.props.sectionsByName}
             renderSection={this.renderSection} 
-            />
+        />
         
         {/* {!this.props.selectedSection 
          ? <h3>false</h3>
