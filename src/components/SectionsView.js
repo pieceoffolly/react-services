@@ -12,22 +12,22 @@ export default class SectionsView extends Component {
     render() {
         return (
             <ul className="tileList">
-                {_.map(this.props.sectionsIDArray, this.renderSectionByID)}
+                {_.map(this.props.sectionsIdArray, this.renderSectionById)}
             </ul>
         )
     }
 
-    renderSectionByID(sectionID) {
+    renderSectionById(sectionId) {
         return (
-            <li key = {sectionID}>
-                {this.renderSectionThroughProps(sectionID)}
+            <li key = {sectionId}>
+                {this.renderSectionThroughProps(sectionId)}
             </li>
         )
     }
 
-    renderSectionThroughProps(sectionID) {
+    renderSectionThroughProps(sectionId) {
         if (typeof this.props.renderSection === 'function') {
-            return this.props.renderSection(sectionID, _.get(this.props.sectionsByID, sectionID));
+            return this.props.renderSection(sectionId, _.get(this.props.sectionsById, sectionId));
         }
     }
 }

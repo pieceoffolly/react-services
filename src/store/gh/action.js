@@ -8,9 +8,9 @@ export function fetchReposes() {
         var array = [1];
         const fetchPromises = _.map(array, (page) => Github.getReposes('All', page));
         const reposes = await Promise.all(fetchPromises);
-        const reposesByName = _.keyBy(reposes, (repos) => repos.id);
+        const reposesById = _.keyBy(_.flatten(reposes), (repos) => repos.id);
 
-        dispatch({type: types.REPOSES_FETCHED, reposesByName})
+        dispatch({type: types.REPOSES_FETCHED, reposesById})
       } catch(error) {
         console.error(error);
       }

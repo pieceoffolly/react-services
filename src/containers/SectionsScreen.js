@@ -23,8 +23,8 @@ class SectionsScreen extends Component {
       <div>
         <h3>Choose section</h3>
         <SectionsView
-            sectionsIDArray={this.props.sectionsNameArray}
-            sectionsByID={this.props.sectionsByName}
+            sectionsIdArray={this.props.sectionsNameArray}
+            sectionsById={this.props.sectionsByName}
             renderSection={this.renderSection} 
             />
         
@@ -35,10 +35,10 @@ class SectionsScreen extends Component {
     );
   }
 
-  renderSection(sectionID, section) {
+  renderSection(sectionId, section) {
     return (
       <SectionsList
-        sectionID={sectionID}        
+        sectionId={sectionId}        
         onClick={this.onSectionClick}>
         <img className="sectionImage" src={section.img} alt={section.URL} />
       </SectionsList>
@@ -46,8 +46,8 @@ class SectionsScreen extends Component {
   }
   //onClick={this.onSectionClick}>
 
-  onSectionClick(sectionID) {
-    this.props.dispatch(sectionsActions.selectSection(sectionID));
+  onSectionClick(sectionId) {
+    this.props.dispatch(sectionsActions.selectSection(sectionId));
   }
 }
 

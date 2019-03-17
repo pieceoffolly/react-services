@@ -37,7 +37,7 @@ export default function reduce(state = initialState, action = {}) {
 
 export function getSections(state) {
     const sectionsByName = state.sections.sectionsByName;
-    const sectionsNameArray = _.keys(sectionsByName)
+    const sectionsNameArray = _.keys(sectionsByName);
     return [sectionsByName, sectionsNameArray];
 }
 
@@ -51,5 +51,5 @@ export function getSelectedSection(state) {
 }
 
 export function isSectionChoosed(state) {
-    return false //state.sections.selectionFinalized;
+    return state.sections.sectionChoosed;
 }

@@ -4,14 +4,14 @@ import Immutable from 'seamless-immutable';
 // import * as 
 
 const initialState = Immutable({
-    reposesByName: undefined
+    reposesById: undefined
 })
 
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case types.REPOSES_FETCHED:
             return state.merge({
-                reposesByName: action.reposesByName
+                reposesById: action.reposesById
             });
         default:
             return state;
@@ -19,5 +19,7 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function getReposes(state) {
-
+    const reposesById = state.reposes.reposesById;
+    const reposesIdArray = _.keys(reposesById);
+    return [reposesById, reposesIdArray];
 }
