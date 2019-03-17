@@ -21,6 +21,12 @@ const Loading = styled.p`
 
 `;
 
+const Avatar = styled.img`
+    max-width:50px;
+    max-height:50px;
+`;
+
+
 class ListScreen extends Component {
     constructor(props) {
         super(props);
@@ -34,6 +40,8 @@ class ListScreen extends Component {
                 <ListView
                     rowsIdArray={this.props.elementsIdArray}
                     rowsById={this.props.elementsById}
+                    ulType={this.props.ulType}
+                    src={this.props.src}
                     renderRow={this.renderRow} 
                 />
             </div>
@@ -48,12 +56,12 @@ class ListScreen extends Component {
     };
 
     renderRow(elementId, element) {
-
         return (
             <ListRow
                 rowId={elementId}
-                onClick={this.onRowClick} >
-                
+                onClick={this.onRowClick}>  
+                <Avatar src={element.avatar_url} alt='avatar' />                                 
+                <a>{element.name}</a>
             </ListRow>
         )
     };
@@ -65,10 +73,14 @@ class ListScreen extends Component {
 
 function mapStateToProps(state) {
     const [elementsById, elementsIdArray]  = ghSelectors.getReposes(state);
+    const ulType = 'gh';
     return {
       elementsById,
       elementsIdArray,
+      ulType
     };
   }
 
 export default connect(mapStateToProps)(ListScreen);
+
+//{/*  */}
