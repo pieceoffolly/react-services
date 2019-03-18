@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import autoBind from 'react-autobind';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import * as ghActions from '../store/gh/action';
-import * as ghSelectors from '../store/gh/reducer';
+import * as elementsActions from '../store/elements/action';
+import * as elementsSelectors from '../store/elements/reducer';
 import ListView from '../components/ListView';
 import ListRow from '../components/ListRow';
 
@@ -28,12 +28,10 @@ class ListScreen extends Component {
                     rowsIdArray={this.props.elementsIdArray}
                     rowsById={this.props.elementsById}
                     ulType={this.props.ulType}
-                    src={this.props.src}
                     renderRow={this.renderRow} 
                 />                
             </div>
-        )
-        
+        )        
     };
 
     renderLoading() {
@@ -47,22 +45,34 @@ class ListScreen extends Component {
             <ListRow
                 rowId={element.id}
                 onClick={this.onRowClick}>  
-                <div><Avatar src={element.avatar_url} alt='avatar' /></div>
-                <div> {element.name} (owner: {element.owner})</div>
+                <div><Avatar src={element.image_url} alt='image' /></div>
+                <div> {element.title} (owner: {element.owner_name})</div>
             </ListRow>
         )
     };
 
     onRowClick(rowId) {
         const answer = window.confirm("Подтверждаете переход к просмотру?");
-        if (answer) this.props.dispatch(ghActions.selectElement(rowId));
+        if (answer) this.props.dispatch(elementsActions.selectElement(rowId));
+    };
+
+    onChangePage(pageId) {
+
     }
 }
 
 function mapStateToProps(state) {
-    const [elementsById, elementsIdArray, elementType]  = ghSelectors.getElements(state);
+    const [elementsById, elementsIdArray, elementType]  = elementsSelectors.getElements(state);
     const ulType = elementType;
-    const header = 'Github repositories';
+    switch(ulType) {
+        case 'GH':
+            var header = 'Github repositories';
+            break;
+        case 'SOF':
+            var header = 'StackOverflow questions';
+            break;        
+    }
+    
     return {
       elementsById,
       elementsIdArray,

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as sectionSelectors from './store/sections/reducer';
-import * as ghSelectors from './store/gh/reducer';
+import * as elementsSelectors from './store/elements/reducer';
 import SectionsScreen from './containers/SectionsScreen';
 import ListScreen from './containers/ListScreen';
 import DetailsScreen from './containers/DetailsScreen';
@@ -26,7 +26,7 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     sectionChoosed: sectionSelectors.isSectionChoosed(state),
-    elementChoosed: ghSelectors.isElementChoosed(state)
+    elementChoosed: elementsSelectors.isElementChoosed(state)
   }
 }
 

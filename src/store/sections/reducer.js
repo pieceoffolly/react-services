@@ -20,18 +20,13 @@ export default function reduce(state = initialState, action = {}) {
                 selectedSection: action.sectionName,
                 sectionChoosed: true
             })
+        case types.SELECTION_RESET:
+            return state.merge({
+                selectedSection:undefined,
+                sectionChoosed: false
+            })
         default:
             return state;
-        // case types.OPEN_GH:
-        //     return state.merge({
-        //         selectedSection: 'GH',
-        //         selectionFinalized: true
-        //     })
-        // case types.OPEN_SOF:
-        //     return state.merge({
-        //         selectedSection: 'SOF',
-        //         selectionFinalized: true
-        //     })
     }
 }
 

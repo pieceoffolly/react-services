@@ -1,6 +1,5 @@
 
 export const SECTIONS_FETCHED = 'sections.SECTIONS_FETCHED';
 export const SECTION_SELECTED = 'sections.SECTION_SELECTED';
-export const OPEN_GH  = "OPEN_GITHUB_REPOSITORIES";
-export const OPEN_SOF = "OPEN_STACKOVERFLOW_POSTS";
+export const SELECTION_RESET  = 'sections.SELECTION_RESET';
 

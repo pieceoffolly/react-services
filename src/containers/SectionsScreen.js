@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import './SectionsScreen.css';
 import * as sectionsActions from '../store/sections/action';
 import * as sectionsSelectors from '../store/sections/reducer';
-import SectionsView from '../components/SectionsView';
-import SectionsList from '../components/SectionsList';
+import ListView from '../components/ListView';
+import ListRow from '../components/ListRow';
 
 class SectionsScreen extends Component {
 
@@ -22,10 +22,11 @@ class SectionsScreen extends Component {
     return (
       <div>
         <h3>Choose section</h3>
-        <SectionsView
-            sectionsIdArray={this.props.sectionsNameArray}
-            sectionsById={this.props.sectionsByName}
-            renderSection={this.renderSection} 
+        <ListView
+            rowsIdArray={this.props.sectionsNameArray}
+            rowsById={this.props.sectionsByName}
+            ulType='Section'
+            renderRow={this.renderRow} 
         />
         
         {/* {!this.props.selectedSection 
@@ -35,18 +36,18 @@ class SectionsScreen extends Component {
     );
   }
 
-  renderSection(sectionId, section) {
+  renderRow(sectionId, section) {
     return (
-      <SectionsList
-        sectionId={sectionId}        
-        onClick={this.onSectionClick}>
+      <ListRow
+        rowId={sectionId}        
+        onClick={this.onRowClick}>
         <img className="sectionImage" src={section.img} alt={section.URL} />
-      </SectionsList>
+      </ListRow>
     )
   }
   //onClick={this.onSectionClick}>
 
-  onSectionClick(sectionId) {
+  onRowClick(sectionId) {
     this.props.dispatch(sectionsActions.selectSection(sectionId));
   }
 }
@@ -56,8 +57,7 @@ function mapStateToProps(state) {
   return {
     sectionsByName,
     sectionsNameArray,  
-    selectedSection: sectionsSelectors.getSelectedSection(state)  
-    // canFinalizeSelection: sectionsSelectors.isTopicSelectionValid(state)
+    selectedSection: sectionsSelectors.getSelectedSection(state)
   };
 }
 

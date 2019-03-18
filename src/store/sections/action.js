@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
 import * as types from './actionTypes';
-import * as sectionsSelectors from './reducer';
-import * as ghActions from '../gh/action';
+import * as elementsActions from '../elements/action';
 
 export function fetchSections() {
     return (dispatch) => {
@@ -22,6 +21,12 @@ export function selectSection(sectionName) {
     return (dispatch) => {
         dispatch({type: types.SECTION_SELECTED, sectionName });
 
-        dispatch(ghActions.fetchElements());
+        dispatch(elementsActions.fetchElements());
+    }
+}
+
+export function clearSelectedSection() {
+    return (dispatch) => {
+        dispatch({type: types.SELECTION_RESET})
     }
 }

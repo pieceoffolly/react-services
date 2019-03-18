@@ -15,8 +15,7 @@ class ListRow extends Component {
         autoBind(this);
     }
 
-    render() {
-        // const backgroundColor = this.props.selected ? '#c0f0ff' : '#fff';
+    render() {        
         return (
           <ParLiDiv
             onClick={this.onClick}>

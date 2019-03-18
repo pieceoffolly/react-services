@@ -6,8 +6,8 @@ const initialState = Immutable({
     elementsById: undefined,
     selectedElement: undefined,
     elementsType: undefined,
-    elementChoosed: false
-
+    elementChoosed: false,
+    currentPage: undefined
 });
 
 export default function reducer(state = initialState, action = {}) {
@@ -22,8 +22,10 @@ export default function reducer(state = initialState, action = {}) {
                 selectedElement: action.elementId,
                 elementChoosed: true
             });
-        // case types.REPOS_SELECTION_FINALIZED:
-        //     return false;
+        case types.ELEMENTS_NOT_RECEIVED:
+            return state.merge({
+                selectedElement: undefined                
+            })
         default:
             return state;
     }
