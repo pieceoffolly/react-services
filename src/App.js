@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import * as sectionSelectors from './store/sections/reducer';
-import * as elementsSelectors from './store/elements/reducer';
-import SectionsScreen from './containers/SectionsScreen';
-import ListScreen from './containers/ListScreen';
-import DetailsScreen from './containers/DetailsScreen';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Home from './containers/Home';
+import Github from './containers/Github';
+import Stackoverflow from './containers/Stackoverflow';
 import './App.css';
 
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        {!this.props.sectionChoosed 
-          ? <SectionsScreen /> 
-          : !this.props.elementChoosed
-            ? <ListScreen />
-            : <DetailsScreen />
-        }
-      </div>
+      // <div className="App">
+      //   {!this.props.sectionChoosed 
+      //     ? <SectionsScreen /> 
+      //     : !this.props.elementChoosed
+      //       ? <ListScreen />
+      //       : <DetailsScreen />
+      //   }
+      // </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/gh" component={Github} />
+          <Route path="/sof" component={Stackoverflow} />
+        </Switch>
+      </Router>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    sectionChoosed: sectionSelectors.isSectionChoosed(state),
-    elementChoosed: elementsSelectors.isElementChoosed(state)
-  }
-}
+// function mapStateToProps(state) {
+//   return {
+//     sectionChoosed: sectionSelectors.isSectionChoosed(state),
+//     elementChoosed: elementsSelectors.isElementChoosed(state)
+//   }
+// }
 
-export default connect(mapStateToProps)(App);
+export default App;

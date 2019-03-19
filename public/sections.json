@@ -1,8 +1,8 @@
 [
-    { "name" : "GH", 
-      "img" : "images/GH.png", 
+    { "name" : "gh", 
+      "img" : "images/gh.png", 
       "URL" : "www.github.com"},
-    { "name" : "SOF", 
-      "img" : "images/SOF.png", 
+    { "name" : "sof", 
+      "img" : "images/sof.png", 
       "URL" : "www.stackoverflow.com"}
 ]

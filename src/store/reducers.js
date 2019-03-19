@@ -1,9 +1,9 @@
 import sections from './sections/reducer';
-import elements from './elements/reducer';
+import github from './github/reducer';
 import details from './details/reducer';
 
 export {
   sections,
-  elements,
+  github,
   details
 };

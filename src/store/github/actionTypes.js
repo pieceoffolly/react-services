@@ -1,0 +1,2 @@
+export const REPOSES_FETCHED = 'github.REPOSES_FETCHED';
+export const REPOSES_NOT_RECEIVED = 'github.REPOSES_NOT_RECEIVED';
