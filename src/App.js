@@ -20,7 +20,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/gh" component={Github} />
+          <Route path="/gh/page1" component={Github} />
           <Route path="/sof" component={Stackoverflow} />
         </Switch>
       </Router>

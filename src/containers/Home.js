@@ -15,7 +15,7 @@ class Home extends Component {
         <Home_div>
             <h3>Choose section</h3>
             <SectionUl>              
-                <Link to="/gh">
+                <Link to="/gh/page1">
                     <SectionLi>
                         <img src='images/Github.png' alt='image'/>
                     </SectionLi>
