@@ -2,14 +2,22 @@ import _ from 'lodash';
 import axios from 'axios';
 
 export async function getReposes(language, page) {   
-    const data = await axios
-         .get(`https://api.github.com/search/repositories?page=${page}&order=desc&q=stars:>1+language:${language}&sort=stars&type=Repositories`)
+    // const data = await axios
+    //      .get(`https://api.github.com/search/repositories?page=${page}&order=desc&q=stars:>1+language:${language}&sort=stars&type=Repositories`)
+    //      .then(function(response) {
+    //         return response.data;
+    //      })
+    //      .catch((error) => {
+    //         throw new Error(`Github API request failed: ` + error);
+    //      });
+    const fileName = 'page' + page +'.json';
+    const data = await axios.get(fileName)
          .then(function(response) {
             return response.data;
          })
          .catch((error) => {
-            throw new Error(`Github API request failed: ` + error);
-         });
+             console.log(error);
+         })
 
 
     const items = _.get(data, 'items');
@@ -39,4 +47,17 @@ export async function getReposesCount(language) {
          });
 
     return _.get(data, "total_count")
+}
+
+export async function autorization() {
+    const data = await axios
+         .get(`https://github.com/login/oauth/authorize`)
+         .then(function(response) {
+            return response.data;
+         })
+         .catch((error) => {
+            throw new Error(`Github API request failed: ` + error);
+         });
+
+    return false;
 }

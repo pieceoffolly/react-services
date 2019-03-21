@@ -3,14 +3,29 @@ import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
+    reposesFetchingEnd: false,
     reposes: undefined,
     currentPage: 1,
     prevPage: "/",
-    totalPages: 30, // Only the first 1000 search results are available
+    totalPages: 3, // Only the first 1000 search results are available
+    logged_in: false
 });
 
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
+        case types.LOGGED_IN:
+            return state.merge({
+                logged_in: true
+            });
+        // case types.LOGGING_FAILED
+        case types.REPOSES_FETCHING_START:
+            return state.merge ({
+                reposesFetchingEnd: false
+            });
+        case types.REPOSES_FETCHING_END:
+            return state.merge ({
+                reposesFetchingEnd: true
+            });
         case types.REPOSES_FETCHED:
             return state.merge ({
                 reposes: action.reposes,              
@@ -30,17 +45,6 @@ export default function reducer(state = initialState, action = {}) {
     }
 }
 
-// export function getElements(state) {
-//     const elementsById = state.elements.elementsById;
-//     const elementsIdArray = _.keys(elementsById);
-//     return [elementsById, elementsIdArray, state.elements.elementsType];
-// }
-
-// export function getElement(state) {
-//     const elementById = _.find(state.elements.elementsById, ['id', state.elements.selectedElement]);
-//     return [elementById, state.elements.elementsType];
-// }
-
 export function getReposes(state) {
     return state.github.reposes
 }
@@ -57,6 +61,14 @@ export function getTotalPages(state) {
     return state.github.totalPages
 }
 
-export function isFetchingPossible(state) {
-    return state.github.fetch_stopped
+export function getDetails(state) {
+    return state.github.details
+}
+
+export function isLoggedIn(state) {
+    return state.github.logged_in
+}
+
+export function isFetchingEnd(state) {
+    return state.github.reposesFetchingEnd
 }

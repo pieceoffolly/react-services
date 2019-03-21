@@ -15,12 +15,12 @@ class Home extends Component {
         <Home_div>
             <h3>Choose section</h3>
             <SectionUl>              
-                <Link to="/gh/page1">
+                <Link to="/gh?page=1">
                     <SectionLi>
                         <img src='images/Github.png' alt='image'/>
                     </SectionLi>
                 </Link>
-                <Link to="/sof">
+                <Link to="/sof?page=1">
                     <SectionLi>
                         <img src='images/Stackoverflow.png' alt='image'/>
                     </SectionLi>
@@ -29,16 +29,7 @@ class Home extends Component {
         </Home_div>
       );
     }
-  }
-  
-// onClick={() => props.fetchReposes()}
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         fetchReposes: () => dispatch(githubAction.fetchReposes()),
-//         dispatch
-//     }
-// }
+}
 
 export default Home;
 

@@ -14,7 +14,6 @@ class Paginator extends Component {
                         {this.renderPrev(this.props.currentPage, this.onClick)}
                         {this.renderFirst(this.props.currentPage, this.onClick)}                        
                         {this.renderPagesBetween(this.props.currentPage, this.props.totalPages, this.onClick)}
-                        {/* <li key="last">{this.props.totalPages}</li> */}
                         {this.renderLast(this.props.currentPage, this.props.totalPages, this.onClick)}
                         {this.renderNext(this.props.currentPage, this.props.totalPages, this.onClick)}                        
                     </ul>
@@ -23,10 +22,14 @@ class Paginator extends Component {
         }
     };
 
+    renderPages() {
+
+    }
+
     renderPrev(currentPage, onClick) {
         let page = Number(currentPage) - 1;
         if (currentPage != 1){
-            return <Link to={"/gh/page"+page}>
+            return <Link to={"/gh?page="+page}>
                         <li key='prev' onClick={onClick}>Prev</li>
                    </Link>
         } else {
@@ -36,11 +39,11 @@ class Paginator extends Component {
 
     renderFirst(currentPage, onClick) {
         if (currentPage == 1){
-            return  <Link to={ "/gh/page1"}>
+            return  <Link to={ "/gh?page=1"}>
                         <li className="bold_li" key="1" onClick={onClick}>1</li>
                     </Link>
         } else {
-            return  <Link to={ "/gh/page1"}>
+            return  <Link to={ "/gh?page=1"}>
                         <li key="1" onClick={onClick}>1</li>
                     </Link>
         }
@@ -72,23 +75,12 @@ class Paginator extends Component {
         }
 
         for (let index = 1; index < length; index++) {
-            // let link
-            // switch (num) {
-            //     case currentPage - 1:
-            //         link = "/gh/page"+Number(currentPage - 1);
-            //         break;
-            //     case currentPage + 1:
-            //         link = "/gh/page;
-            //         break;
-            //     default:
-            //         link = "/gh/page"+num;
-            // }
             if (num == currentPage)
-                resLi[index] =  <Link to={"/gh/page" + num}>
+                resLi[index] =  <Link to={"/gh?page=" + num}>
                                         <li className="bold_li" key={num} onClick={onClick}>{num}</li>
                                 </Link>
             else
-                resLi[index] =  <Link to={"/gh/page" + num}>
+                resLi[index] =  <Link to={"/gh?page=" + num}>
                                         <li key={num} onClick={onClick}>{num}</li>
                                 </Link>
             num++;
@@ -107,8 +99,8 @@ class Paginator extends Component {
 
     renderNext(currentPage, totalPages, onClick) {
         let page = Number(currentPage) + 1;
-        if (currentPage !== totalPages){
-            return  <Link to={"/gh/page"+page}>
+        if (currentPage != totalPages){
+            return  <Link to={"/gh?page="+page}>
                         <li key='next' onClick={onClick}>Next</li>
                     </Link>
         } else {
@@ -117,7 +109,7 @@ class Paginator extends Component {
     };
 
     renderLast(currentPage, totalPages, onClick) {
-        let link = "/gh/page"+totalPages;
+        let link = "/gh?page="+totalPages;
         if (currentPage == totalPages){
             return  <Link to={link}>
                         <li className="bold_li" key={totalPages} onClick={onClick}>{totalPages}</li>
@@ -129,30 +121,12 @@ class Paginator extends Component {
         }
     }
 
-    onClick = (props) => {
+    onClick = (ownProps) => {
         if (typeof this.props.onClick === 'function') {
-            let page = props._targetInst.key;
+            let page = ownProps._targetInst.key;
             this.props.onClick(page);
         }
     }
-    // onClick() {
-    //     if (typeof this.props.onClick === 'function') {
-    //         let page = 5;
-    //         this.props.onClick(page);
-    //     }
-    // }
-    // onPageClick() {
-
-    // }
-
-    // onNextClick() {
-
-    // }
-
-    // onPrevClick() {
-
-    // }
-
 }
 
 export default Paginator;

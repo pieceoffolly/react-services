@@ -1,9 +1,9 @@
-// import sections from './sections/reducer';
 import github from './github/reducer';
-// import details from './details/reducer';
+import githubDetails from './github/details/reducer';
+import stackoverflow from './stackoverflow/reducer';
 
 export {
-  // sections,
   github,
-  // details
+  githubDetails,
+  // stackoverflow
 };

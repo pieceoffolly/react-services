@@ -1,0 +1,1 @@
+export const DETAILS_FETCHED = 'githubDetails.DETAILS_FETCHED';

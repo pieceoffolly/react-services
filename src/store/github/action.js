@@ -3,18 +3,20 @@ import * as types from './actionTypes';
 import * as githubSelectors from './reducer';
 import * as github_api from '../../services/github_api';
 
-export function fetchReposes() {
+export function fetchReposes(page) {
   return async(dispatch, getState) => {
     try {        
-        let page = githubSelectors.getCurrentPage(getState());
-        var array = [1];
-        let fetchPromises = _.map(array, (repos) => github_api.getReposes('All', page));
+        // let page = githubSelectors.getCurrentPage(getState());
+        const array = [1];
+        const fetchPromises = _.map(array, (repos) => github_api.getReposes('All', page));
+        
         let reposes = await Promise.all(fetchPromises);
         if (!reposes){
         // dispatch({type: types.REPOSES_NOT_RECEIVED});
         // dispatch(sectionsActions.clearSelectedSection());
         } else {        
           reposes = _.orderBy(_.keyBy(_.flatten(reposes), (repos) => repos.id), 'stars', 'desc');
+          dispatch({type: types.REPOSES_FETCHING_END})
           dispatch({type: types.REPOSES_FETCHED, reposes})
         }            
     } catch(error) {
@@ -37,6 +39,21 @@ export function setPage(page) {
       default:
         newPage =  page;
     } 
-    dispatch({type: types.NEW_PAGE, prevPage, newPage});
-    dispatch(fetchReposes());
+    dispatch({type: types.NEW_PAGE, prevPage, newPage});  
+    dispatch(fetchReposes(newPage));
+    // dispatch({type: types.REPOSES_FETCHING_START})  
   }}
+
+
+
+  export function setFetchingStart() {
+    return (dispatch) => {
+      dispatch({type: types.REPOSES_FETCHING_START})
+    }    
+  }
+
+  export function authorization() {
+    return async(dispatch) => {
+
+    }
+  }

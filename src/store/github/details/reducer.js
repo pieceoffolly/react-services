@@ -3,22 +3,20 @@ import * as types from './actionTypes';
 import Immutable from 'seamless-immutable';
 
 const initialState = Immutable({
-    details: undefined,
-    detailsType: undefined
+    repos: undefined
 });
 
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
         case types.DETAILS_FETCHED:
-            return state.merge({
-                details: action.detailsById,
-                detailsType: action.detailsType
+            return state.merge ({
+                repos: action.repos
             });
         default:
             return state;
     }
 }
 
-export function getDetails(state){
-    return state.details.details;
+export function getDetails(state) {
+    return state.githubDetails.repos
 }
