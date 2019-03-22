@@ -14,10 +14,9 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/gh" component={Github} />
-          <Route path="/sof" component={Stackoverflow} />  
-          
-          {/* <Route path="/gh/details:repos" component={GithubDetails} />         */}
+          <Route exact path="/gh" component={Github} />
+          <Route exact path="/sof" component={Stackoverflow} />            
+          <Route path="/gh/details/:reposId" component={GithubDetails} />        
         </Switch>
       </Router>
     );

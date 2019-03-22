@@ -6,9 +6,15 @@ import styled from 'styled-components';
 import _ from 'lodash';
 // import * as githubActions from '../store/github/action';
 // import * as githubSelectors from '../store/github/reducer';
+import * as githubDetailsActions from '../store/github/details/action';
 import * as githubDetailsSelectors from '../store/github/details/reducer';
 
 class GithubDetails extends Component {
+
+    componentDidMount() {
+        this.props.fetchDetails(this.props.match.params.reposId)
+    }
+
     render() {
         if(!this.props.details) return this.renderLoading();
         return (
@@ -40,7 +46,13 @@ function mapStateToProps(state) {
     };
   }
 
-export default connect(mapStateToProps)(GithubDetails);
+const mapDispatchStateToProps = (dispatch) => {
+   return {
+       fetchDetails: (reposId) => dispatch(githubDetailsActions.fetchDetails(reposId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchStateToProps)(GithubDetails);
 
 const Detail = styled.div`
     display: block;
