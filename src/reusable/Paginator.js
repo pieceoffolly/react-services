@@ -132,7 +132,9 @@ class Paginator extends Component {
 export default Paginator;
 
 const MainDiv = styled.div`
-    cursor: pointer;
+   cursor: pointer;
+   margin-top: -20px;
+   
    li {  
         padding: 5px;
         background-color: #f5f5f5;

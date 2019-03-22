@@ -34,30 +34,41 @@ class Github extends Component {
     this.props.dispatch(githubActions.fetchReposes(page)); 
     }
 
-    componentWillUnmount() {
-        this.props.dispatch(githubActions.setPage(1));
-    }
+    // componentWillUnmount() {
+    //     this.props.dispatch(githubActions.setPage(1));
+    // }
 
-    render() {
-        // if (!this.props.reposes||!this.props.reposesFetchingEnd) return this.renderLoading();
+    render() {        
         let renderPar = this.props.location.pathname.indexOf('details')
-        console.log(this.props);
         if (!this.props.reposes) return this.renderLoading();
         return (            
             <div>
                 {(renderPar == -1)?
-                    <div>
-                        <h3><Logo main src='images/Github_logo.png' alt='image' />Popular Github repositories</h3>
-                        <Paginator
-                            currentPage={this.props.currentPage}
-                            // prevPage={this.props.prevPage}
-                            totalPages={this.props.totalPages}
-                            onClick={this.onPageClick}
-                        />
-                        <ListUl >
-                            {_.map( this.props.reposes, this.renderLi)}
-                        </ListUl>
-                    </div>
+                    <Body>
+                        <Head>
+                            <Back onClick={() =>this.props.history.push('/')} > 
+                                Back 
+                            </Back>
+                            <Header>
+                                <div>
+                                    <Logo main src='images/Github_logo.png' alt='image' />
+                                </div>
+                                <div><h3>Popular Github repositories</h3></div>
+                            </Header>
+                            <div>
+                                <Paginator
+                                    currentPage={this.props.currentPage}
+                                    totalPages={this.props.totalPages}
+                                    onClick={this.onPageClick}
+                                />
+                            </div>                            
+                        </Head>   
+                        <Content>                            
+                            <ListUl >
+                                {_.map( this.props.reposes, this.renderLi)}
+                            </ListUl>  
+                        </Content>                                             
+                    </Body>
                 : null }
                                     
                 <Route exact path="/gh/details/:reposId"  component={GithubDetails} /> ;                        
@@ -84,7 +95,6 @@ class Github extends Component {
 
     onPageClick(page) {        
         this.props.dispatch(githubActions.setPage(page));
-        // <Redirect to=
     }
 
     onReposClick(repos) {
@@ -120,16 +130,55 @@ function mapStateToProps(state) {
 //     }
 // }
 
-{/* <li key={reposId}>    
-    <ParLiDiv
-        rowId={rowId}
-        onClick={this.onClick}>
-        <div><Avatar src={element.image_url} alt='image' /></div>
-        <div> {element.title} (owner: {element.owner_name})</div>
-    </ParLiDiv>                                              
-    {/* {this.renderRowThroughProps(rowId)}                         */}
-// </li> */}
 export default connect(mapStateToProps)(Github);
+
+const Body = styled.div`
+    display: block;
+    // margin_bottom: 10px;
+`;
+
+const Head = styled.div`
+    display: block;
+    position: fixed; 
+    width: 100%;
+    height: 170px;
+    background-color: white;
+`;
+
+const Back = styled.div`
+    text-align: left;
+    margin: 10px 0px 10px 20px;
+    background-color: #f5f5f5;
+    width: 50px;
+    text-align: center;
+
+    :hover {
+        background-color: #e5e5e5;
+    }
+`;
+
+const Header = styled.div`    
+    margin: 5px 0px 0px 20px; 
+    div {
+        display: inline-block;
+    }
+
+    h3 {
+        margin-left: 10px;
+    }
+`;
+
+const Logo = styled.img`
+    max-width: ${props => props.main? '75px' : '50px'};
+    max-height: ${props => props.main? '75px' : '50px'};
+    border-radius: ${props => props.main? '0%': '50%'};
+    margin-bottom: -10px;
+`;
+
+const Content = styled.div`
+    // position: top;
+    padding-top: 180px;
+`;
 
 const ListUl = styled.ul`
     flex-wrap: wrap;
@@ -137,6 +186,10 @@ const ListUl = styled.ul`
     margin: 0;
     list-style-type: none;
     color: black;
+
+    h3 {
+        margin-left: 20px;
+    }
 
     li {
         margin: 0px 0px 10px 0px;
@@ -156,16 +209,12 @@ const ListUl = styled.ul`
         margin-left: 10px;
     }
 `;
-const Logo = styled.img`
-    max-width: ${props => props.main? '75px' : '50px'};
-    max-height: ${props => props.main? '75px' : '50px'};
-    border-radius: ${props => props.main? '0%': '50%'};
-    margin-bottom: -10px;
-`;
-
 const ParLiDiv = styled.div`
     width: 100%;
     height: 100%;
     margin: 0;
     cursor: pointer;
 `;
+
+
+

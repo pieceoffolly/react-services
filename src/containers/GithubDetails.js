@@ -12,11 +12,12 @@ class GithubDetails extends Component {
     render() {
         if(!this.props.details) return this.renderLoading();
         return (
-            <div align='center'>                
+            <div align='center'>   
+                <Back onClick={() =>this.props.history.goBack()} > Back </Back>             
                 <Detail>
                     <img src={this.props.details.image_url} alt='image'/>
-                    <a href={this.props.details.URL}>
-                        <h3>{this.props.details.title}</h3>
+                    <a href={this.props.details.url} target='_blank'>
+                        <h3>{this.props.details.name}</h3>
                     </a>                        
                     <p>owner: {this.props.details.owner_name}</p> 
                     <p>stars: {this.props.details.stars}</p>
@@ -44,7 +45,7 @@ export default connect(mapStateToProps)(GithubDetails);
 const Detail = styled.div`
     display: block;
     min-width: 500px;
-    max-width: 1000px;
+    max-width: 800px;
     min-height: 500px;
     max-height: 1000px;
     background-color: #f5f5f5;
@@ -53,5 +54,16 @@ const Detail = styled.div`
     img {
         max-width: 200px;
         max-height: 200px;
+    }
+`;
+
+const Back = styled.div`
+    margin: 10px 0px 10px 20px;
+    background-color: #f5f5f5;
+    width: 50px;
+    text-align: center;
+
+    :hover {
+        background-color: #e5e5e5;
     }
 `;

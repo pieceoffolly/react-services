@@ -4,9 +4,8 @@ import * as githubSelectors from './reducer';
 import * as github_api from '../../services/github_api';
 
 export function fetchReposes(page) {
-  return async(dispatch, getState) => {
+  return async(dispatch) => {
     try {        
-        // let page = githubSelectors.getCurrentPage(getState());
         const array = [1];
         const fetchPromises = _.map(array, (repos) => github_api.getReposes('All', page));
         

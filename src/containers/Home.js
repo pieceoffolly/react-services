@@ -34,7 +34,7 @@ class Home extends Component {
 export default Home;
 
 const Home_div = styled.div`
-
+    text-align: center;
 `;
 
 const SectionUl = styled.ul`

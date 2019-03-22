@@ -31,7 +31,7 @@ export async function getReposes(language, page) {
             stars: _.get(repos, 'stargazers_count'),
             forks: _.get(repos, 'forks_count'),
             open_issues: _.get(repos, 'open_issues_count'),
-            URL: _.get(repos, 'html_url')
+            url: _.get(repos, 'html_url')
         }
     })
 };
